@@ -30,6 +30,18 @@ class LlmResponseParser:
         result = self.__options.merge_options(baml_options).parse_response(function_name="ExtractResume", llm_response=llm_response, mode="request")
         return typing.cast(types.Resume, result)
 
+    def GetProductExp(
+        self, llm_response: str, baml_options: BamlCallOptions = {},
+    ) -> str:
+        result = self.__options.merge_options(baml_options).parse_response(function_name="GetProductExp", llm_response=llm_response, mode="request")
+        return typing.cast(str, result)
+
+    def GetTrayProducts(
+        self, llm_response: str, baml_options: BamlCallOptions = {},
+    ) -> typing.List[str]:
+        result = self.__options.merge_options(baml_options).parse_response(function_name="GetTrayProducts", llm_response=llm_response, mode="request")
+        return typing.cast(typing.List[str], result)
+
     
 
 class LlmStreamParser:
@@ -43,5 +55,17 @@ class LlmStreamParser:
     ) -> stream_types.Resume:
         result = self.__options.merge_options(baml_options).parse_response(function_name="ExtractResume", llm_response=llm_response, mode="stream")
         return typing.cast(stream_types.Resume, result)
+
+    def GetProductExp(
+        self, llm_response: str, baml_options: BamlCallOptions = {},
+    ) -> str:
+        result = self.__options.merge_options(baml_options).parse_response(function_name="GetProductExp", llm_response=llm_response, mode="stream")
+        return typing.cast(str, result)
+
+    def GetTrayProducts(
+        self, llm_response: str, baml_options: BamlCallOptions = {},
+    ) -> typing.List[str]:
+        result = self.__options.merge_options(baml_options).parse_response(function_name="GetTrayProducts", llm_response=llm_response, mode="stream")
+        return typing.cast(typing.List[str], result)
 
     

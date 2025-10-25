@@ -94,6 +94,36 @@ class BamlAsyncClient:
                 "resume": resume,
             })
             return typing.cast(types.Resume, result.cast_to(types, types, stream_types, False, __runtime__))
+    async def GetProductExp(self, product: baml_py.Image,
+        baml_options: BamlCallOptions = {},
+    ) -> str:
+        # Check if on_tick is provided
+        if 'on_tick' in baml_options:
+            # Use streaming internally when on_tick is provided
+            stream = self.stream.GetProductExp(product=product,
+                baml_options=baml_options)
+            return await stream.get_final_response()
+        else:
+            # Original non-streaming code
+            result = await self.__options.merge_options(baml_options).call_function_async(function_name="GetProductExp", args={
+                "product": product,
+            })
+            return typing.cast(str, result.cast_to(types, types, stream_types, False, __runtime__))
+    async def GetTrayProducts(self, tray: baml_py.Image,
+        baml_options: BamlCallOptions = {},
+    ) -> typing.List[str]:
+        # Check if on_tick is provided
+        if 'on_tick' in baml_options:
+            # Use streaming internally when on_tick is provided
+            stream = self.stream.GetTrayProducts(tray=tray,
+                baml_options=baml_options)
+            return await stream.get_final_response()
+        else:
+            # Original non-streaming code
+            result = await self.__options.merge_options(baml_options).call_function_async(function_name="GetTrayProducts", args={
+                "tray": tray,
+            })
+            return typing.cast(typing.List[str], result.cast_to(types, types, stream_types, False, __runtime__))
     
 
 
@@ -115,6 +145,30 @@ class BamlStreamClient:
           lambda x: typing.cast(types.Resume, x.cast_to(types, types, stream_types, False, __runtime__)),
           ctx,
         )
+    def GetProductExp(self, product: baml_py.Image,
+        baml_options: BamlCallOptions = {},
+    ) -> baml_py.BamlStream[str, str]:
+        ctx, result = self.__options.merge_options(baml_options).create_async_stream(function_name="GetProductExp", args={
+            "product": product,
+        })
+        return baml_py.BamlStream[str, str](
+          result,
+          lambda x: typing.cast(str, x.cast_to(types, types, stream_types, True, __runtime__)),
+          lambda x: typing.cast(str, x.cast_to(types, types, stream_types, False, __runtime__)),
+          ctx,
+        )
+    def GetTrayProducts(self, tray: baml_py.Image,
+        baml_options: BamlCallOptions = {},
+    ) -> baml_py.BamlStream[typing.List[str], typing.List[str]]:
+        ctx, result = self.__options.merge_options(baml_options).create_async_stream(function_name="GetTrayProducts", args={
+            "tray": tray,
+        })
+        return baml_py.BamlStream[typing.List[str], typing.List[str]](
+          result,
+          lambda x: typing.cast(typing.List[str], x.cast_to(types, types, stream_types, True, __runtime__)),
+          lambda x: typing.cast(typing.List[str], x.cast_to(types, types, stream_types, False, __runtime__)),
+          ctx,
+        )
     
 
 class BamlHttpRequestClient:
@@ -130,6 +184,20 @@ class BamlHttpRequestClient:
             "resume": resume,
         }, mode="request")
         return result
+    async def GetProductExp(self, product: baml_py.Image,
+        baml_options: BamlCallOptions = {},
+    ) -> baml_py.baml_py.HTTPRequest:
+        result = await self.__options.merge_options(baml_options).create_http_request_async(function_name="GetProductExp", args={
+            "product": product,
+        }, mode="request")
+        return result
+    async def GetTrayProducts(self, tray: baml_py.Image,
+        baml_options: BamlCallOptions = {},
+    ) -> baml_py.baml_py.HTTPRequest:
+        result = await self.__options.merge_options(baml_options).create_http_request_async(function_name="GetTrayProducts", args={
+            "tray": tray,
+        }, mode="request")
+        return result
     
 
 class BamlHttpStreamRequestClient:
@@ -143,6 +211,20 @@ class BamlHttpStreamRequestClient:
     ) -> baml_py.baml_py.HTTPRequest:
         result = await self.__options.merge_options(baml_options).create_http_request_async(function_name="ExtractResume", args={
             "resume": resume,
+        }, mode="stream")
+        return result
+    async def GetProductExp(self, product: baml_py.Image,
+        baml_options: BamlCallOptions = {},
+    ) -> baml_py.baml_py.HTTPRequest:
+        result = await self.__options.merge_options(baml_options).create_http_request_async(function_name="GetProductExp", args={
+            "product": product,
+        }, mode="stream")
+        return result
+    async def GetTrayProducts(self, tray: baml_py.Image,
+        baml_options: BamlCallOptions = {},
+    ) -> baml_py.baml_py.HTTPRequest:
+        result = await self.__options.merge_options(baml_options).create_http_request_async(function_name="GetTrayProducts", args={
+            "tray": tray,
         }, mode="stream")
         return result
     
