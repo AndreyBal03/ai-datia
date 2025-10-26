@@ -20,10 +20,9 @@ client<llm> CustomGPT5Mini {
 }
 
 client<llm> CustomGemini {
-  provider "openai-generic"
+  provider "google-ai"
   options {
-    base_url "https://openrouter.ai/api/v1"
-    api_key env.OPENROUTER_API_KEY
-    model "google/gemini-2.5-flash"
+    model "gemini-2.5-flash"
+    api_key env.GEMINI_API_KEY
   }
 }
